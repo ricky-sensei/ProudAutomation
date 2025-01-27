@@ -1,0 +1,22 @@
+
+Sesame2Raspi:
+  ✔ nature_remo,sesameのAPIkeyを取得 @done(25-01-24 12:17) ※.envに記載
+  ☐ nature_remo, sesameのデバイス情報を取得
+  ☐ sesameの解錠ときにイベント発火
+
+  ☐ ユーザー名がリッキーだった場合、別プロセスでslideshowコマンドを実行し、pythonプログラムを終了
+  ☐ 解錠用のwebサーバーをラズパイで作成
+    ✔ ngnixのインストール @done(25-01-27 11:40)※windwos WSLでも成功
+    ☐ ラズパイがリクエストを受け取ったときに、セサミAPIを叩いて解錠
+      ☐ まずはAPIを叩いて解錠するまで(python)
+        ☐ 解錠リクエスト送信
+        ☐ 5秒後にセサミの状態確認
+          ☐ 結果の通知
+      ☐ リクエストをローカルホストから受け取る(flask? gunicorn?)
+    ☐ それと同時にslideshowコマンドを実行
+      ☐ 実行中であればコマンドを走らせないて
+    ☐ (できたら)slideshow成功通知を出す(何で？)
+
+  https://m365.cloud.microsoft/chat?FORM=undexpand&internalredirect=CCM&auth=2
+  ☐ 朝6時にpythonプログラムを実行
+  ☐ 夜12時にプログラム終了
