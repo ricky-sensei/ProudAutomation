@@ -5,8 +5,12 @@ app=Flask(__name__)
 @app.route('/',methods=['GET','POST'])
 def home():
     if request.method=='POST':
-        openSesame()
-        return render_template('index.html')
+        response = openSesame()
+        if response == "<Response [200]>":
+            result = "解錠成功 "+ response
+        else:
+            result = "解錠失敗？ "+ response
+        return render_template('index.html', result = result)
     return render_template('index.html')
 
 if __name__ == '__main__':

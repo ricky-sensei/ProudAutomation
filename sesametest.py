@@ -6,6 +6,7 @@ from Crypto.Hash import CMAC
 from Crypto.Cipher import AES
 
 def openSesame():
+    dotenv.load_dotenv(override=True)
     # 各種パラメータ
     api_key = os.environ["SESAME_API"]
     uuid = os.environ["SESAME_UUID"]
@@ -37,10 +38,10 @@ def openSesame():
         'history': base64_history,
         'sign': sign
     }
-    res = requests.post(url, json.dumps(body), headers=headers)
-    print(res)
+    res = str(requests.post(url, json.dumps(body), headers=headers))
+    return res
 
 
 if __name__ == '__main__':
-    main()
+    print(openSesame())
  
