@@ -5,39 +5,42 @@ import datetime, base64, json
 from Crypto.Hash import CMAC
 from Crypto.Cipher import AES
 
+def openSesame():
+    # 各種パラメータ
+    api_key = os.environ["SESAME_API"]
+    uuid = os.environ["SESAME_UUID"]
+    secret_key = os.environ["SESAME_SECRETKEY"]
 
-dotenv.load_dotenv()
+    # ヘッダーの設定
+    headers = {'x-api-key': api_key}
 
-# 各種パラメータ
-api_key = os.environ["SESAME_API"]
-uuid = os.environ["SESAME_UUID"]
-secret_key = os.environ["SESAME_SECRETKEY"]
+    # cmd
+    cmd = 83 # 施錠する場合は「82」、解錠する場合は「83」
 
-# ヘッダーの設定
-headers = {'x-api-key': api_key}
+    # history
+    history = 'WEB API' # とりあえず「WEB API」と名付ける
+    base64_history = base64.b64encode(bytes(history, 'utf-8')).decode()
 
-# cmd
-cmd = 83 # 施錠する場合は「82」、解錠する場合は「83」
+    # sign
+    cmac = CMAC.new(bytes.fromhex(secret_key), ciphermod=AES)
+    ts = int(datetime.datetime.now().timestamp())
+    message = ts.to_bytes(4, byteorder='little')
+    message = message.hex()[2:8]
+    cmac = CMAC.new(bytes.fromhex(secret_key), ciphermod=AES)
+    cmac.update(bytes.fromhex(message))
+    sign = cmac.hexdigest()
 
-# history
-history = 'WEB API' # とりあえず「WEB API」と名付ける
-base64_history = base64.b64encode(bytes(history, 'utf-8')).decode()
+    # API
+    url = f'https://app.candyhouse.co/api/sesame2/{uuid}/cmd'
+    body = {
+        'cmd': cmd,
+        'history': base64_history,
+        'sign': sign
+    }
+    res = requests.post(url, json.dumps(body), headers=headers)
+    print(res)
 
-# sign
-cmac = CMAC.new(bytes.fromhex(secret_key), ciphermod=AES)
-ts = int(datetime.datetime.now().timestamp())
-message = ts.to_bytes(4, byteorder='little')
-message = message.hex()[2:8]
-cmac = CMAC.new(bytes.fromhex(secret_key), ciphermod=AES)
-cmac.update(bytes.fromhex(message))
-sign = cmac.hexdigest()
 
-# API
-url = f'https://app.candyhouse.co/api/sesame2/{uuid}/cmd'
-body = {
-    'cmd': cmd,
-    'history': base64_history,
-    'sign': sign
-}
-res = requests.post(url, json.dumps(body), headers=headers)
-print(res)
+if __name__ == '__main__':
+    main()
+ 
