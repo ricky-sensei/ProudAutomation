@@ -10,10 +10,15 @@ Sesame2Raspi:
     https://benelop.jp/blog/engineer/infrastructure/environment-deploy/
     ☐ ラズパイがリクエストを受け取ったときに、セサミAPIを叩いて解錠
       ✔ まずはAPIを叩いて解錠するまで(python)  @done(25-01-30 23:16)
-        ☐ 解錠が成功したかどうかを確認
+        ✔ 解錠が成功したかどうかを確認 @done(25-01-31 15:05)
+        ✔ ステータスコードによってページの表示を変える(jinja2) @done(25-01-31 15:06)
         ☐ 5秒後にセサミの状態確認
           ☐ 結果の通知
             ☐ うまくいかなかったときにどうするか
+        ☐ 公開時のセキュリティについて
+          UrLを公開するけど、macアドレスなどでユーザーを判定したい ログインはしたくない
+          そもそもURLを公開すべきではない？端末からラズパイをbluetoothにすべき？
+          
     ☐ リクエストをローカルホストから受け取る(flask? gunicorn?)
     ☐ slideshowコマンドを実行
       ☐ amazon photosから画像をDL

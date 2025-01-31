@@ -6,11 +6,13 @@ app=Flask(__name__)
 def home():
     if request.method=='POST':
         response = openSesame()
+        disabled = "" 
         if response == "<Response [200]>":
             result = "解錠成功 "+ response
+            disabled = "disabled"
         else:
             result = "解錠失敗？ "+ response
-        return render_template('index.html', result = result)
+        return render_template('index.html', result=result, disabled=disabled)
     return render_template('index.html')
 
 if __name__ == '__main__':

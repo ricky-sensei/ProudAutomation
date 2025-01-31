@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>open proud sesame</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <form method="POST", action="/">
-        <button type="submit">解錠</button>
+        <button id="open_button" type="submit" {{disabled}}>解錠</button>
     </form>
-    <h4>{{result}}</h4>
+    <p id="display_3sec">{{result}}<p>
+    <script>
+        const display_3sec = document.getElementById("display_3sec");
+        const open_button = document.getElementById("open_button")
+        function delete_message(){
+            display_3sec.classList.add("d-none")
+            open_button.disabled = false
+        }
+        setTimeout(()=>{
+            delete_message();
+        }, 10000)
+    </script>
 </body>
 </html>
