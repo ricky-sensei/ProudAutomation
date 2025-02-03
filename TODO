@@ -7,6 +7,7 @@ Sesame2Raspi:
   ☐ 解錠用のwebサーバーをラズパイで作成
     ✔ ngnixのインストール @done(25-01-27 11:40)※windwos WSLでも成功
     ☐ flask + gunicorn + nginx
+    
     https://benelop.jp/blog/engineer/infrastructure/environment-deploy/
     ☐ ラズパイがリクエストを受け取ったときに、セサミAPIを叩いて解錠
       ✔ まずはAPIを叩いて解錠するまで(python)  @done(25-01-30 23:16)
