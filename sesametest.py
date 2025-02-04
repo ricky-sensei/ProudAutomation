@@ -11,6 +11,7 @@ def openSesame():
     api_key = os.environ["SESAME_API"]
     uuid = os.environ["SESAME_UUID"]
     secret_key = os.environ["SESAME_SECRETKEY"]
+    base_url = "https://app.candyhouse.co/api/sesame2"
 
     # ヘッダーの設定
     headers = {'x-api-key': api_key}
@@ -32,7 +33,7 @@ def openSesame():
     sign = cmac.hexdigest()
 
     # API
-    url = f'https://app.candyhouse.co/api/sesame2/{uuid}/cmd'
+    url = f'{base_url}/{uuid}/cmd'
     body = {
         'cmd': cmd,
         'history': base64_history,
