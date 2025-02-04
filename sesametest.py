@@ -6,7 +6,7 @@ from Crypto.Hash import CMAC
 from Crypto.Cipher import AES
 
 def openSesame():
-    dotenv.load_dotenv(override=True)
+    dotenv.load_dotenv(override=True) 
     # 各種パラメータ
     api_key = os.environ["SESAME_API"]
     uuid = os.environ["SESAME_UUID"]
